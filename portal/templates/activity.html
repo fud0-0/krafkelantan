@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Activities</title>
+</head>
+<body>
+    <header class="site-header">
+        <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
+        <nav>
+            <ul class="nav-links">
+                {% if request.session.clientID %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'performance' %}">Performances</a></li>
+                <li><a href="{% url 'stall' %}">Stalls</a></li>
+                <li><a href="{% url 'activity' %}">Activities</a></li>
+                <li><a href="{% url 'starred_list' %}">Starred Items</a></li>
+                <li><a href="{% url 'search_item' %}">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="events">
+        <h2>Activities</h2>
+        <div class="event-list">
+            <div class="event-item">
+                <h3>Wau Creation</h3>
+                <img src="{% static 'wau_creation.jpeg' %}" alt="Wau Creation" style="width: 250px; height: 150px; object-fit: cover; border-radius: 8px;">
+                <ul>
+                    <li>Engaging event focused on the traditional art of making Malaysian kites, known as "Wau".</li>
+                    <li>Learn about the history, cultural significance, and craftsmanship of Wau.</li>
+                    <li>Hands-on workshops to design and build your own Wau, guided by skilled artisans.</li>
+                  </ul>                  
+                <form method="POST" action="{% url 'star_item' 'activity' 'A1' %}">
+                    {% csrf_token %}
+                    {% if performance in starred_performances %}
+                        <button type="submit" class="btn">Unstar</button>
+                    {% else %}
+                        <button type="submit" class="btn">Star</button>
+                    {% endif %}
+                </form>
+            </div>
+            <div class="event-item">
+                <h3>Historical Education</h3>
+                <img src="{% static 'historical_education.jpeg' %}" alt="Historical Education" style="width: 250px; height: 150px; object-fit: cover; border-radius: 8px;">
+                <ul>
+                    <li>Deep dive into the rich history and heritage of Kelantan.</li>
+                    <li>Features lectures, interactive exhibits, and guided tours.</li>
+                    <li>Explore historical landmarks, traditional practices, and significant events of Kelantan.</li>
+                  </ul>                  
+                <form method="POST" action="{% url 'star_item' 'activity' 'A2' %}">
+                    {% csrf_token %}
+                    {% if performance in starred_performances %}
+                        <button type="submit" class="btn">Unstar</button>
+                    {% else %}
+                        <button type="submit" class="btn">Star</button>
+                    {% endif %}
+                </form>
+            </div>
+            <div class="event-item">
+                <h3>Gurau-Gurau Gasing</h3>
+                <img src="{% static 'gurau_gasing.jpeg' %}" alt="Gurau-Gurau Gasing" style="width: 250px; height: 150px;object-fit: cover;  border-radius: 8px;">
+                <ul>
+                    <li>Event centered around the traditional Malaysian game of top spinning.</li>
+                    <li>Learn about different types of Gasing and their cultural importance.</li>
+                    <li>Includes demonstrations by expert players and opportunities to try spinning Gasing.</li>
+                  </ul>                  
+                <form method="POST" action="{% url 'star_item' 'activity' 'A3' %}">
+                    {% csrf_token %}
+                    {% if performance in starred_performances %}
+                        <button type="submit" class="btn">Unstar</button>
+                    {% else %}
+                        <button type="submit" class="btn">Star</button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Kraf Kelantan. All Rights Reserved.</p>
+        <ul class="social-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

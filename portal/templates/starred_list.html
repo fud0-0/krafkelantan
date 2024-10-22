@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Starred Items</title>
+</head>
+<body>
+    <header class="site-header">
+        <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
+        <nav>
+            <ul class="nav-links">
+                {% if request.session.clientID %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'performance' %}">Performances</a></li>
+                <li><a href="{% url 'stall' %}">Stalls</a></li>
+                <li><a href="{% url 'activity' %}">Activities</a></li>
+                <li><a href="{% url 'starred_list' %}">Starred Items</a></li>
+                <li><a href="{% url 'search_item' %}">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+<br>
+    <h1>Your Starred Items</h1>
+
+    <div class="events">
+        <h2>ㅤStarred Performancesㅤ </h2>
+        <ul class="event-list">
+            {% if performances %}
+                {% for performance in performances %}
+                    <li class="event-item">{{ performance.name }}
+                        <form method="POST" action="{% url 'star_item' 'performance' performance.performanceID %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Unstar</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p>No starred performances yet.</p>
+            {% endif %}
+        </ul>
+    
+        <h2>  Starred Stalls  </h2>
+        <ul class="event-list">
+            {% if stalls %}
+                {% for stall in stalls %}
+                    <li class="event-item">{{ stall.name }}
+                        <form method="POST" action="{% url 'star_item' 'stall' stall.stallID %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Unstar</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p>No starred stalls yet.</p>
+            {% endif %}
+        </ul>
+    
+        <h2>  Starred Activities  </h2>
+        <ul class="event-list">
+            {% if activities %}
+                {% for activity in activities %}
+                    <li class="event-item">{{ activity.name }}
+                        <form method="POST" action="{% url 'star_item' 'activity' activity.activityID %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Unstar</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p>No starred activities yet.</p>
+            {% endif %}
+        </ul>
+    </div>
+    
+
+    <footer>
+        <p>&copy; 2024 Kraf Kelantan. All Rights Reserved.</p>
+        <ul class="social-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
+

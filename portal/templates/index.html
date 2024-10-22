@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tourism Portal</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
+            <p class="slogan">Explore the Best of Kelantan's Cultural Scene!</p>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'performance' %}">Performances</a></li>
+                    <li><a href="{% url 'stall' %}">Stalls</a></li>
+                    <li><a href="{% url 'activity' %}">Activities</a></li>
+                    <li><a href="{% url 'starred_list' %}">Starred Items</a></li>
+                    <li><a href="{% url 'search_item' %}">Search</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Discover The Best of Kelantan</h1>
+        <p>Discover Performances, Stalls, and Activities Across Kelantan!</p>
+        <a href="{% url 'performance' %}" class="btn">Explore Now</a>
+    </section>
+            {% if request.session.clientID %}
+            <a href="{% url 'logout' %}">Logout</a>
+            <a href="{% url 'submit_feedback' %}">Submit Feedback</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Kelantan Tourism Portal. All Rights Reserved.</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
+

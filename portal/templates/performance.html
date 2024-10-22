@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Performances</title>
+</head>
+<body>
+    <header class="site-header">
+        <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
+        <nav>
+            <ul class="nav-links">
+                {% if request.session.clientID %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'performance' %}">Performances</a></li>
+                <li><a href="{% url 'stall' %}">Stalls</a></li>
+                <li><a href="{% url 'activity' %}">Activities</a></li>
+                <li><a href="{% url 'starred_list' %}">Starred Items</a></li>
+                <li><a href="{% url 'search_item' %}">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="events">
+        <h2>Performances</h2>
+        <div class="event-list">
+            <div class="event-item">
+                <h3>Dikir Barat</h3>
+                <img src="{% static 'dikir_barat.jpeg' %}" alt="Dikir Barat" style="width: 250px; height: 150px; object-fit: cover; border-radius: 8px;">
+                <ul>
+                    <li>Traditional musical performance originating from Kelantan.</li>
+                    <li>Features a group of singers and musicians performing in a call-and-response style.</li>
+                    <li>Incorporates energetic hand movements and synchronized clapping.</li>
+                    <li>Often includes humorous and satirical elements in the lyrics.</li>
+                  </ul>
+                  
+                  <form method="POST" action="{% url 'star_item' 'performance' 'P1' %}">
+                    {% csrf_token %}
+                    {% if performance in starred_performances %}
+                        <button type="submit" class="btn">Unstar</button>
+                    {% else %}
+                        <button type="submit" class="btn">Star</button>
+                    {% endif %}
+                </form>
+                
+            </div>
+            <div class="event-item">
+                <h3>Mak Yong</h3>
+                <img src="{% static 'mak_yong.jpeg' %}" alt="Mak Yong" style="width: 250px; height: 150px; object-fit: cover;  border-radius: 8px;">
+                <ul>
+                    <li>Traditional dance-drama from northern Malaysia, particularly Kelantan.</li>
+                    <li>Combines acting, singing, and dancing to tell stories from local mythology.</li>
+                    <li>Recognized by UNESCO as a Masterpiece of the Oral and Intangible Heritage of Humanity.</li>
+                    <li>Performances often involve elaborate costumes and live music.</li>
+                  </ul>                  
+                <form method="POST" action="{% url 'star_item' 'performance' 'P2' %}"></form>
+                    {% csrf_token %}
+                    {% if performance in starred_performances %}
+                        <button type="submit" class="btn">Unstar</button>
+                    {% else %}
+                        <button type="submit" class="btn">Star</button>
+                    {% endif %}
+                </form>
+            </div>
+            <div class="event-item">
+                <h3>Wayang Kulit</h3>
+                <img src="{% static 'wayang_kulit.jpeg' %}" alt="Wayang Kulit" style="width: 250px; height: 150px;object-fit: cover;  border-radius: 8px;">
+                <ul>
+                    <li>Traditional shadow puppet theatre from Kelantan.</li>
+                    <li>Uses intricately carved leather puppets to depict stories from folklore and mythology.</li>
+                    <li>Accompanied by traditional music and narration by a puppet master (dalang).</li>
+                    <li>Performances are usually held at night and create a magical, immersive experience.</li>
+                  </ul>                  
+                <form method="POST" action="{% url 'star_item' 'performance' 'P3' %}">
+                    {% csrf_token %}
+                    {% if performance in starred_performances %}
+                        <button type="submit" class="btn">Unstar</button>
+                    {% else %}
+                        <button type="submit" class="btn">Star</button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Kraf Kelantan. All Rights Reserved.</p>
+        <ul class="social-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

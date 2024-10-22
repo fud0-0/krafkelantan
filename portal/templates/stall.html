@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Stalls</title>
+</head>
+<body>
+    <header class="site-header">
+        <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
+        <nav>
+            <ul class="nav-links">
+                {% if request.session.clientID %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'performance' %}">Performances</a></li>
+                <li><a href="{% url 'stall' %}">Stalls</a></li>
+                <li><a href="{% url 'activity' %}">Activities</a></li>
+                <li><a href="{% url 'starred_list' %}">Starred Items</a></li>
+                <li><a href="{% url 'search_item' %}">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="events">
+        <h2>Stalls</h2>
+        <div class="event-list">
+            <div class="event-item">
+                <h3>Cha Ba Ang</h3>
+                <img src="{% static 'cha_ba_ang.jpeg' %}" alt="Cha Ba Ang" style="width: 250px; height: 150px;object-fit: cover;  border-radius: 8px;">
+                <ul>
+                    <li>Offers a variety of traditional Kelantanese beverages.</li>
+                    <li>Popular drinks include Milo Tonggeng, Teh Tarik Madu, and Air Kelapa (coconut water).</li>
+                    <li>Experience the unique flavors and refreshing taste of local drinks.</li>
+                  </ul>
+                  
+                <form method="POST" action="{% url 'star_item' 'stall' 'S1' %}">
+                    {% csrf_token %}
+                    {% if performance in starred_performances %}
+                        <button type="submit" class="btn">Unstar</button>
+                    {% else %}
+                        <button type="submit" class="btn">Star</button>
+                    {% endif %}
+                </form>
+            </div>
+            <div class="event-item">
+                <h3>Make Make</h3>
+                <img src="{% static 'make_make.jpeg' %}" alt="Make Make" style="width: 250px; height: 150px; object-fit: cover; border-radius: 8px;">
+                <ul>
+                    <li>Serves a range of authentic Kelantanese dishes.</li>
+                    <li>Highlights include Nasi Kerabu, Nasi Dagang, and Ayam Percik.</li>
+                    <li>Enjoy the bold and robust flavors that Kelantanese cuisine is known for.</li>
+                  </ul>
+                <form method="POST" action="{% url 'star_item' 'stall' 'S2' %}">
+                    {% csrf_token %}
+                    {% if performance in starred_performances %}
+                        <button type="submit" class="btn">Unstar</button>
+                    {% else %}
+                        <button type="submit" class="btn">Star</button>
+                    {% endif %}
+                </form>
+            </div>
+            <div class="event-item">
+                <h3>Sayang Sekali</h3>
+                <img src="{% static 'sayang_sekali.jpeg' %}" alt="Sayang Sekali" style="width: 250px; height: 150px; object-fit: cover; border-radius: 8px;">
+                <ul>
+                    <li>Features a selection of traditional Kelantanese snacks.</li>
+                    <li>Popular snacks include Etok Salai (smoked clams), Keropok Lekor (fish crackers), and Kuih Akok (sweet egg-based snack).</li>
+                    <li>Perfect for a quick bite or to take home as souvenirs.</li>
+                  </ul>                  
+                <form method="POST" action="{% url 'star_item' 'stall' 'S3' %}">
+                    {% csrf_token %}
+                    {% if performance in starred_performances %}
+                        <button type="submit" class="btn">Unstar</button>
+                    {% else %}
+                        <button type="submit" class="btn">Star</button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Kraf Kelantan. All Rights Reserved.</p>
+        <ul class="social-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

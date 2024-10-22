@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Feedback Detail</title>
+</head>
+<body>
+    <header class="site-header">
+        <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
+        <nav>
+            <ul class="nav-links">
+                {% if request.session.clientID %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'performance' %}">Performances</a></li>
+                <li><a href="{% url 'stall' %}">Stalls</a></li>
+                <li><a href="{% url 'activity' %}">Activities</a></li>
+                <li><a href="{% url 'starred_list' %}">Starred Items</a></li>
+                <li><a href="{% url 'search_item' %}">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Feedback Detail</h1>
+    <p><strong>Username:</strong> {{ feedback.username }}</p>
+    <p><strong>Email:</strong> {{ feedback.email }}</p>
+    <p><strong>Message:</strong> {{ feedback.message }}</p>
+    
+    <a href="{% url 'update_feedback' feedback.id %}">Update Feedback</a>
+    <br><br><br><br><br><br>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Kelantan Tourism Portal. All Rights Reserved.</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

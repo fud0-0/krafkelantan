@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Search Item</title>
+</head>
+<body>
+    <header class="site-header">
+        <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
+        <nav>
+            <ul class="nav-links">
+                {% if request.session.clientID %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'performance' %}">Performances</a></li>
+                <li><a href="{% url 'stall' %}">Stalls</a></li>
+                <li><a href="{% url 'activity' %}">Activities</a></li>
+                <li><a href="{% url 'starred_list' %}">Starred Items</a></li>
+                <li><a href="{% url 'search_item' %}">Search</a></li>
+        
+            </ul>
+        </nav>
+    </header>
+    <br><br>
+    <h2>Activity</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>A1</td>
+                <td>Hands-on workshop</td>
+            </tr>
+            <tr>
+                <td>A2</td>
+                <td>Learn history and heritage</td>
+            </tr>
+            <tr>
+                <td>A3</td>
+                <td>Cool demo & playing in the Sun</td>
+            </tr>
+        </tbody>
+    </table> <br>
+
+    <h2 class="table-title">Performance</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>P1</td>
+                <td>Energetic hand movements and humor</td>
+            </tr>
+            <tr>
+                <td>P2</td>
+                <td>Singing & dancing of local mythology</td>
+            </tr>
+            <tr>
+                <td>P3</td>
+                <td>Shadow puppets and magic</td>
+            </tr>
+        </tbody>
+    </table> <br>
+
+    <h2>Stall</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>S1</td>
+                <td>Beverages</td>
+            </tr>
+            <tr>
+                <td>S2</td>
+                <td>Food</td>
+            </tr>
+            <tr>
+                <td>S3</td>
+                <td>Snacks</td>
+            </tr>
+        </tbody>
+    </table> <br><br>
+
+    <form method="GET" action="{% url 'search_item' %}">
+        <label for="id">Item Code:</label>
+        <input type="text" id="id" name="id" placeholder="e.g., S1, A2, P3" required> 
+        <button type="submit">Search</button>
+    </form><br>
+    <br>
+
+    {% if item %}
+        <h2>Search Result:</h2> <br>
+        <p>Name: {{ item.name }}</p><br>
+        <img src="{% static item.image_path %}" alt="{{ item.name }}" style="width: 250px; height: 150px; object-fit: cover;">
+    {% elif error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <br><br><br>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Kelantan Tourism Portal. All Rights Reserved.</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
+
